@@ -19,7 +19,6 @@
     "@capacitor/app": "^7.0.1",
     "@capacitor/keyboard": "^7.0.1",
     "@capacitor/local-notifications": "^7.0.1",
-    "@capacitor/push-notifications": "^7.0.1",
     "framer-motion": "^10.16.16",
     "google-auth-library": "^10.1.0",
     "googleapis": "^150.0.1",

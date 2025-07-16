@@ -1,5 +1,4 @@
 import { LocalNotifications, ScheduleOptions } from '@capacitor/local-notifications';
-import { PushNotifications } from '@capacitor/push-notifications';
 import { Capacitor } from '@capacitor/core';
 
 export interface NotificationData {
@@ -41,13 +40,12 @@ class NotificationService {
         return;
       }
 
-      // Safely request permissions with proper error handling
-      await this.requestPermissionsSafely();
+      // Only request local notification permissions
+      await this.requestLocalPermissionsSafely();
 
-      // Only initialize push notifications if local permissions granted
+      // Setup local notification listeners only
       if (this.hasPermissions) {
-        await this.initializePushNotificationsSafely();
-        await this.setupNotificationListeners();
+        await this.setupLocalNotificationListeners();
       }
 
       this.isInitialized = true;
@@ -60,7 +58,7 @@ class NotificationService {
     }
   }
 
-  private async requestPermissionsSafely() {
+  private async requestLocalPermissionsSafely() {
     try {
       // Check if LocalNotifications is available
       if (!LocalNotifications) {
@@ -89,51 +87,7 @@ class NotificationService {
     }
   }
 
-  private async initializePushNotificationsSafely() {
-    try {
-      if (!PushNotifications) {
-        console.warn('PushNotifications plugin not available');
-        return;
-      }
-
-      if (Capacitor.isNativePlatform()) {
-        const permission = await PushNotifications.requestPermissions();
-        
-        if (permission.receive === 'granted') {
-          await PushNotifications.register();
-        }
-
-        // Listen for registration with error handling
-        await PushNotifications.addListener('registration', (token) => {
-          console.log('Push registration success, token: ' + token.value);
-          try {
-            localStorage.setItem('push_token', token.value);
-          } catch (storageError) {
-            console.warn('Failed to store push token:', storageError);
-          }
-        });
-
-        // Listen for registration errors
-        await PushNotifications.addListener('registrationError', (error) => {
-          console.error('Push registration error:', error);
-        });
-
-        // Listen for push notifications
-        await PushNotifications.addListener('pushNotificationReceived', (notification) => {
-          console.log('Push notification received: ', notification);
-        });
-
-        await PushNotifications.addListener('pushNotificationActionPerformed', (notification) => {
-          console.log('Push notification action performed: ', notification);
-        });
-      }
-    } catch (error) {
-      console.error('Push notification setup failed:', error);
-      // Don't throw - this is not critical for the app to function
-    }
-  }
-
-  private async setupNotificationListeners() {
+  private async setupLocalNotificationListeners() {
     try {
       if (!LocalNotifications) {
         return;
