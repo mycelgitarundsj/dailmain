@@ -306,10 +306,15 @@ export default function Tasks() {
           style={{ marginBottom: '30px' }}
         >
           <h2 style={{ fontSize: '20px', fontWeight: '600', fontFamily: 'Poppins, sans-serif', color: theme.colors.text, marginBottom: '4px' }}>
-            Pre-Planned Task Collections
+            {activeTab === 'today' ? 'Daily' : activeTab === 'week' ? 'Weekly' : 'Monthly'} Task Collections
           </h2>
           <p style={{ fontSize: '14px', color: theme.colors.textSecondary, marginBottom: '16px' }}>
-            Tap to add entire collections to your day ✨
+            {activeTab === 'today' 
+              ? 'Quick daily routines to build healthy habits ✨'
+              : activeTab === 'week' 
+                ? 'Weekly maintenance and self-care routines 🌟'
+                : 'Monthly deep-dive tasks for life organization 🎯'
+            }
           </p>
           
           <div style={{ 
@@ -317,7 +322,7 @@ export default function Tasks() {
             gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', 
             gap: '12px' 
           }}>
-            {prePlannedTasks.map((plan, index) => (
+            {filteredPlans.map((plan, index) => (
               <motion.button
                 key={plan.id}
                 initial={{ opacity: 0, y: 20 }}
