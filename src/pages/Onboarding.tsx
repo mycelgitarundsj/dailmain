@@ -1,14 +1,15 @@
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Sparkles, ChevronRight } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 
 export default function Onboarding() {
-  const navigate = useNavigate()
+  // Remove navigate since we're not using routing for onboarding anymore
 
   const handleGetStarted = () => {
     // Mark onboarding as complete
     localStorage.setItem('dailyflow_onboarding_complete', 'true')
-    navigate('/')
+    // Reload the page to trigger the App component to re-check onboarding status
+    window.location.reload()
   }
 
   return (
@@ -172,53 +173,11 @@ export default function Onboarding() {
           </p>
         </motion.div>
 
-        {/* Features */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2, duration: 0.8 }}
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '16px',
-            marginBottom: '40px',
-            width: '100%',
-          }}
-        >
-          {[
-            { emoji: '🎯', text: 'Smart task prioritization' },
-            { emoji: '🎡', text: 'Decision-making wheel' },
-            { emoji: '📊', text: 'Progress tracking' },
-            { emoji: '🧠', text: 'ADHD-friendly design' },
-          ].map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1.4 + index * 0.1, duration: 0.6 }}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                padding: '12px 20px',
-                borderRadius: '20px',
-                gap: '12px',
-                backdropFilter: 'blur(10px)',
-              }}
-            >
-              <span style={{ fontSize: '24px' }}>{feature.emoji}</span>
-              <span style={{ fontSize: '16px', fontWeight: '500', color: 'white' }}>
-                {feature.text}
-              </span>
-            </motion.div>
-          ))}
-        </motion.div>
-
         {/* Get Started Button */}
         <motion.button
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.8, duration: 0.8 }}
+          transition={{ delay: 1.2, duration: 0.8 }}
           onClick={handleGetStarted}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -249,7 +208,7 @@ export default function Onboarding() {
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 2.0, duration: 1 }}
+          transition={{ delay: 1.4, duration: 1 }}
           style={{
             fontSize: '14px',
             color: 'white',

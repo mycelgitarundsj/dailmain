@@ -12,12 +12,16 @@ import { useTheme } from './contexts/ThemeContext'
 function App() {
   const { theme } = useTheme()
   const [showLoading, setShowLoading] = useState(true)
-  const [hasSeenOnboarding, setHasSeenOnboarding] = useState(false)
+  const [hasSeenOnboarding, setHasSeenOnboarding] = useState(true)
 
   useEffect(() => {
     // Check if user has seen onboarding
     const onboardingComplete = localStorage.getItem('dailyflow_onboarding_complete')
-    setHasSeenOnboarding(!!onboardingComplete)
+    if (onboardingComplete) {
+      setHasSeenOnboarding(true)
+    } else {
+      setHasSeenOnboarding(false)
+    }
   }, [])
 
   const handleLoadingComplete = () => {
@@ -31,14 +35,12 @@ function App() {
   return (
     <div className={theme.isDark ? 'dark' : ''} style={{ backgroundColor: theme.colors.background, minHeight: '100vh' }}>
       <Routes>
-        <Route path="/onboarding" element={<Onboarding />} />
-        <Route path="/" element={hasSeenOnboarding ? <Layout /> : <Navigate to="/onboarding" replace />}>
+        <Route path="/" element={hasSeenOnboarding ? <Layout /> : <Onboarding />}>
           <Route index element={<Home />} />
           <Route path="tasks" element={<Tasks />} />
           <Route path="progress" element={<Progress />} />
           <Route path="settings" element={<Settings />} />
         </Route>
-        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </div>
   )
