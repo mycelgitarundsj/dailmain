@@ -200,9 +200,45 @@ export default function Settings() {
             alignItems: 'center',
             justifyContent: 'center',
             marginRight: '16px',
-            fontSize: '24px',
+            overflow: 'hidden',
           }}>
-            🌟
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 512 512"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect width="512" height="512" rx="120" fill="#F5F5F0"/>
+              <circle cx="256" cy="256" r="200" fill="#4ECDC4" opacity="0.3"/>
+              <defs>
+                <radialGradient id="clockGradientSettings" cx="0.3" cy="0.3" r="0.8">
+                  <stop offset="0%" stopColor="#4ECDC4"/>
+                  <stop offset="50%" stopColor="#2E8B8B"/>
+                  <stop offset="100%" stopColor="#1E5F5F"/>
+                </radialGradient>
+              </defs>
+              <circle cx="256" cy="256" r="180" fill="url(#clockGradientSettings)"/>
+              <g stroke="white" strokeWidth="8" strokeLinecap="round">
+                <line x1="256" y1="96" x2="256" y2="126"/>
+                <line x1="331" y1="125" x2="318" y2="148"/>
+                <line x1="387" y1="181" x2="364" y2="194"/>
+                <line x1="416" y1="256" x2="386" y2="256"/>
+                <line x1="387" y1="331" x2="364" y2="318"/>
+                <line x1="331" y1="387" x2="318" y2="364"/>
+                <line x1="256" y1="416" x2="256" y2="386"/>
+                <line x1="181" y1="387" x2="194" y2="364"/>
+                <line x1="125" y1="331" x2="148" y2="318"/>
+                <line x1="96" y1="256" x2="126" y2="256"/>
+                <line x1="125" y1="181" x2="148" y2="194"/>
+                <line x1="181" y1="125" x2="194" y2="148"/>
+              </g>
+              <g stroke="white" strokeLinecap="round">
+                <line x1="256" y1="256" x2="206" y2="206" strokeWidth="12"/>
+                <line x1="256" y1="256" x2="331" y2="181" strokeWidth="8"/>
+              </g>
+              <circle cx="256" cy="256" r="12" fill="white"/>
+            </svg>
           </div>
           <div style={{ flex: 1 }}>
             <h2 style={{ fontSize: '18px', fontWeight: '600', fontFamily: 'Poppins, sans-serif', color: theme.colors.text, marginBottom: '2px' }}>
