@@ -183,6 +183,18 @@ export default function Tasks() {
     return today
   }
 
+  // Filter plans based on active tab
+  const filteredPlans = prePlannedTasks.filter(plan => {
+    if (activeTab === 'today') {
+      return ['Productivity', 'Health', 'Creative'].includes(plan.category)
+    } else if (activeTab === 'week') {
+      return ['Life', 'Health', 'Creative', 'Productivity'].includes(plan.category)
+    } else if (activeTab === 'month') {
+      return ['Life', 'Health', 'Productivity', 'Personal'].includes(plan.category)
+    }
+    return true
+  })
+
   return (
     <div style={{ backgroundColor: theme.colors.background, minHeight: '100vh' }}>
       {/* Header */}
