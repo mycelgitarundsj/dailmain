@@ -180,13 +180,14 @@ export default function Onboarding() {
           onClick={handleGetStarted}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          style={{
+            backgroundColor: 'rgba(255, 255, 255, 0.2)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             padding: '16px 32px',
             borderRadius: '25px',
             border: 'none',
+            overflow: 'hidden',
             backgroundColor: '#fff',
             color: '#667eea',
             cursor: 'pointer',
@@ -246,13 +247,62 @@ export default function Onboarding() {
               delay: index * 0.2,
               repeatType: "reverse"
             }}
-            style={{
-              fontSize: '24px',
-              opacity: 0.7,
-            }}
+          <svg
+            width="80"
+            height="80"
+            viewBox="0 0 512 512"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }}
           >
-            {emoji}
-          </motion.div>
+            {/* Rounded square background */}
+            <rect width="512" height="512" rx="120" fill="rgba(245, 245, 240, 0.9)"/>
+            
+            {/* Outer teal ring */}
+            <circle cx="256" cy="256" r="200" fill="#4ECDC4" opacity="0.4"/>
+            
+            {/* Main clock circle with gradient */}
+            <defs>
+              <radialGradient id="clockGradientOnboarding" cx="0.3" cy="0.3" r="0.8">
+                <stop offset="0%" stopColor="#4ECDC4"/>
+                <stop offset="50%" stopColor="#2E8B8B"/>
+                <stop offset="100%" stopColor="#1E5F5F"/>
+              </radialGradient>
+            </defs>
+            
+            <circle cx="256" cy="256" r="180" fill="url(#clockGradientOnboarding)"/>
+            
+            {/* Clock hour markers */}
+            <g stroke="white" strokeWidth="8" strokeLinecap="round">
+              <line x1="256" y1="96" x2="256" y2="126"/>
+              <line x1="331" y1="125" x2="318" y2="148"/>
+              <line x1="387" y1="181" x2="364" y2="194"/>
+              <line x1="416" y1="256" x2="386" y2="256"/>
+              <line x1="387" y1="331" x2="364" y2="318"/>
+              <line x1="331" y1="387" x2="318" y2="364"/>
+              <line x1="256" y1="416" x2="256" y2="386"/>
+              <line x1="181" y1="387" x2="194" y2="364"/>
+              <line x1="125" y1="331" x2="148" y2="318"/>
+              <line x1="96" y1="256" x2="126" y2="256"/>
+              <line x1="125" y1="181" x2="148" y2="194"/>
+              <line x1="181" y1="125" x2="194" y2="148"/>
+            </g>
+            
+            {/* Animated clock hands */}
+            <motion.g 
+              stroke="white" 
+              strokeLinecap="round"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+              style={{ transformOrigin: '256px 256px' }}
+            >
+              <line x1="256" y1="256" x2="206" y2="206" strokeWidth="12"/>
+              <line x1="256" y1="256" x2="331" y2="181" strokeWidth="8"/>
+            </motion.g>
+            
+            {/* Center dot */}
+            <circle cx="256" cy="256" r="12" fill="white"/>
+          </svg>
         ))}
       </motion.div>
     </div>

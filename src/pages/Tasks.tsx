@@ -198,7 +198,7 @@ export default function Tasks() {
           style={{ marginBottom: '20px' }}
         >
           <h1 style={{ fontSize: '24px', fontWeight: '700', fontFamily: 'Poppins, sans-serif', marginBottom: '4px' }}>
-            Tasks & Planning
+            🕐 Tasks & Planning
           </h1>
           <p style={{ fontSize: '16px', color: theme.colors.textSecondary }}>
             Organize your day with focus 🎯
