@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 import Navigation from './Navigation'
 import { useTheme } from '@/contexts/ThemeContext'

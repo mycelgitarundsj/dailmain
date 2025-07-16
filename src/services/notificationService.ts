@@ -83,7 +83,7 @@ class NotificationService {
       this.hasPermissions = false;
       
       // Try to handle specific error cases
-      if (permError.message && permError.message.includes('not implemented')) {
+      if (permError instanceof Error && permError.message && permError.message.includes('not implemented')) {
         console.warn('Notifications not implemented on this platform');
       }
     }
